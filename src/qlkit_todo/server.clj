@@ -1,6 +1,5 @@
 (ns qlkit-todo.server
-  (:require [fbc-utils.debug :refer [??]]
-            [clojure.edn :as edn]
+  (:require [clojure.edn :as edn]
             [qlkit.core :as ql]
             [qlkit-todo.parsers :as pa]))
 

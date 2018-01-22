@@ -1,7 +1,6 @@
 (ns qlkit-todo.parsers
   (:refer-clojure :rename {read core-read})
-  (:require [qlkit.core :as ql]
-            [fbc-utils.debug :refer [dbg] :refer-macros [??]]))
+  (:require [qlkit.core :as ql]))
 
 (def sequencer (atom 2))
 

@@ -1,6 +1,5 @@
 (ns qlkit-todo.parsers
-  (:require [qlkit.core :as ql]
-            [fbc-utils.debug :refer [dbg] :refer-macros [??]]))
+  (:require [qlkit.core :as ql]))
 
 (defmulti read first)
 
