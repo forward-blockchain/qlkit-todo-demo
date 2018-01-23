@@ -12,10 +12,6 @@
 
 (defonce app-state (atom {}))
 
-(set! (.-state js/window)
-      (fn []
-        (js/console.log @app-state)))
-
 (defcomponent TodoItem
   (query [[:todo/text] [:db/id]])
   (render [{:keys [:todo/text] :as atts} state]
