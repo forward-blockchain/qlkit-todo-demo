@@ -1,6 +1,6 @@
 (ns qlkit-todo.core
   (:require-macros [cljs.core.async.macros :refer [go]])
-  (:require [qlkit.core :as ql :refer-macros [defcomponent]]
+  (:require [qlkit.core :as ql :refer [defcomponent]]
             [goog.dom :as gdom]
             [qlkit-todo.parsers :as pa]
             [qlkit-material-ui.core :refer [enable-material-ui!]]
