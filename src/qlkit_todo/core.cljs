@@ -1,6 +1,7 @@
 (ns qlkit-todo.core
   (:require-macros [cljs.core.async.macros :refer [go]])
-  (:require [qlkit.core :as ql :refer [defcomponent]]
+  (:require [qlkit.core :as ql]
+            [qlkit-renderer.core :as qr :refer-macros [defcomponent]]
             [goog.dom :as gdom]
             [qlkit-todo.parsers :as pa]
             [qlkit-material-ui.core :refer [enable-material-ui!]]
@@ -17,7 +18,7 @@
   (render [{:keys [:todo/text] :as atts} state]
           [:li {:primary-text text
                 :right-icon [:span {:on-click (fn []
-                                                (ql/transact! [:todo/delete!]))}
+                                                (qr/transact! [:todo/delete!]))}
                              [:navigation-cancel]]}]))
 
 (defcomponent TodoList
@@ -29,11 +30,11 @@
                     :placeholder "What needs to be done?"
                     :on-key-down (fn [e]
                                    (when (= (.-keyCode e) 13)
-                                     (ql/transact! [:todo/new! {:db/id     (random-uuid)
+                                     (qr/transact! [:todo/new! {:db/id     (random-uuid)
                                                                 :todo/text new-todo}])
-                                     (ql/update-state! dissoc :new-todo)))
+                                     (qr/update-state! dissoc :new-todo)))
                     :on-change   (fn [e]
-                                   (ql/update-state! assoc :new-todo (.-value (.-target e))))}]
+                                   (qr/update-state! assoc :new-todo (.-value (.-target e))))}]
            (when (seq todos)
              [:card [:ol (for [todo todos]
                            [TodoItem todo])]])]))
