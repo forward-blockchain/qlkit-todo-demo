@@ -14,7 +14,8 @@
                  [qlkit "0.2.0-SNAPSHOT"]
                  [qlkit-material-ui "0.2.0-SNAPSHOT"]
                  [com.cognitect/transit-cljs "0.8.243"]
-                 [cljs-http/cljs-http "0.1.44"]]
+                 [cljs-http/cljs-http "0.1.44"]
+                 [sablono "0.8.1"]]
 
   :plugins [[lein-figwheel "0.5.14"]
             [lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
