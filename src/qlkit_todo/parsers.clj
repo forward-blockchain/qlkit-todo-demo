@@ -8,7 +8,7 @@
                   1 {:db/id 1 :todo/text "pay the bills"}
                   2 {:db/id 2 :todo/text "iron the curtains"}}))
 
-(defmulti read first)
+(defmulti read (fn [qterm & _] (first qterm)))
 
 (defmethod read :qlkit-todo/todos
   [[_ params :as query-term] env]
@@ -27,7 +27,7 @@
   (when (@todos todo-id)
     todo-id))
 
-(defmulti mutate first)
+(defmulti mutate (fn [& args] (ffirst args)))
 
 (defmethod mutate :todo/new!
   [[dispatch-key params :as query-term] env]

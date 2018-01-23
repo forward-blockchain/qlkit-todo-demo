@@ -1,7 +1,7 @@
 (ns qlkit-todo.parsers
   (:require [qlkit.core :as ql]))
 
-(defmulti read first)
+(defmulti read (fn [qterm & _] (first qterm)))
 
 (defmethod read :qlkit-todo/todos
   [[dispatch-key params :as query-term] env {:keys [:todo/by-id] :as state}]
@@ -20,7 +20,7 @@
   [query-term {:keys [todo-id] :as env} state]
   (get-in state [:todo/by-id todo-id :todo/text]))
 
-(defmulti mutate first)
+(defmulti mutate (fn [qterm & _] (first qterm)))
 
 (defmethod mutate :todo/new!
   [[dispatch-key params :as query-term] env state-atom]
@@ -31,7 +31,7 @@
   [query-term {:keys [todo-id] :as env} state-atom]
   (swap! state-atom update :todo/by-id dissoc todo-id))
 
-(defmulti remote first)
+(defmulti remote (fn [qterm & _] (first qterm)))
 
 (defmethod remote :todo/new!
   [query-term state]
@@ -53,7 +53,7 @@
   [query-term state]
   (ql/parse-children-remote query-term)) 
 
-(defmulti sync first)
+(defmulti sync (fn [qterm & _] (first qterm)))
 
 (defmethod sync :qlkit-todo/todos
   [[_ params :as query-term] result env state-atom]
