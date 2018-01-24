@@ -11,7 +11,7 @@
 (defmulti read (fn [qterm & _] (first qterm)))
 
 (defmethod read :qlkit-todo/todos
-  [[_ params :as query-term] env]
+  [[_ params :as query-term] env _]
   (let [{:keys [todo-id]} params]
     (if todo-id
       [(ql/parse-children query-term (assoc env :todo-id todo-id))]
@@ -30,7 +30,7 @@
 (defmulti mutate (fn [qterm & _] (first qterm)))
 
 (defmethod mutate :todo/new!
-  [[dispatch-key params :as query-term] env]
+  [[dispatch-key params :as query-term] env _]
   (let [{:keys [:db/id :todo/text]} params
         permanent-id                (swap! sequencer inc)]
     (swap! todos
