@@ -19,11 +19,11 @@
         (ql/parse-children query-term (assoc env :todo-id id)))))) 
 
 (defmethod read :todo/text
-  [query-term {:keys [todo-id] :as env}]
+  [query-term {:keys [todo-id] :as env} _]
   (get-in @todos [todo-id :todo/text]))
 
 (defmethod read :db/id
-  [query-term {:keys [todo-id] :as env}]
+  [query-term {:keys [todo-id] :as env} _]
   (when (@todos todo-id)
     todo-id))
 
@@ -41,5 +41,5 @@
     [id permanent-id]))
 
 (defmethod mutate :todo/delete!
-  [query-term {:keys [todo-id] :as env}]
+  [query-term {:keys [todo-id] :as env} _]
   (swap! todos dissoc todo-id))
