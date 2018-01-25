@@ -1,6 +1,6 @@
 (ns qlkit-todo.parsers
   (:refer-clojure :rename {read core-read})
-  (:require [qlkit.core :as ql]))
+  (:require [qlkit.core :refer [parse-children]]))
 
 (def sequencer (atom 2))
 
@@ -14,9 +14,9 @@
   [[_ params :as query-term] env _]
   (let [{:keys [todo-id]} params]
     (if todo-id
-      [(ql/parse-children query-term (assoc env :todo-id todo-id))]
+      [(parse-children query-term (assoc env :todo-id todo-id))]
       (for [id (keys @todos)]
-        (ql/parse-children query-term (assoc env :todo-id id)))))) 
+        (parse-children query-term (assoc env :todo-id id)))))) 
 
 (defmethod read :todo/text
   [query-term {:keys [todo-id] :as env} _]

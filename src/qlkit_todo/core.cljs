@@ -1,12 +1,12 @@
 (ns qlkit-todo.core
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [qlkit.core :as ql]
-            [qlkit-renderer.core :as qr :refer-macros [defcomponent]]
-            [goog.dom :as gdom]
-            [qlkit-todo.parsers :as pa]
+            [qlkit-renderer.core :refer [transact! update-state!] :refer-macros [defcomponent]]
+            [goog.dom :refer [getElement]]
+            [qlkit-todo.parsers :refer [read mutate remote sync]]
             [qlkit-material-ui.core :refer [enable-material-ui!]]
-            [cljs-http.client :as http]
-            [cljs.reader :as reader]))
+            [cljs-http.client :as http :refer [post]]
+            [cljs.reader :refer [read-string]]))
 
 (enable-console-print!)
 (enable-material-ui!)
@@ -18,7 +18,7 @@
   (render [{:keys [:todo/text] :as atts} state]
           [:li {:primary-text text
                 :right-icon [:span {:on-click (fn []
-                                                (qr/transact! [:todo/delete!]))}
+                                                (transact! [:todo/delete!]))}
                              [:navigation-cancel]]}]))
 
 (defcomponent TodoList
@@ -30,26 +30,26 @@
                     :placeholder "What needs to be done?"
                     :on-key-down (fn [e]
                                    (when (= (.-keyCode e) 13)
-                                     (qr/transact! [:todo/new! {:db/id     (random-uuid)
-                                                                :todo/text new-todo}])
-                                     (qr/update-state! dissoc :new-todo)))
+                                     (transact! [:todo/new! {:db/id     (random-uuid)
+                                                             :todo/text new-todo}])
+                                     (update-state! dissoc :new-todo)))
                     :on-change   (fn [e]
-                                   (qr/update-state! assoc :new-todo (.-value (.-target e))))}]
+                                   (update-state! assoc :new-todo (.-value (.-target e))))}]
            (when (seq todos)
              [:card [:ol (for [todo todos]
                            [TodoItem todo])]])]))
 
 (defn remote-handler [query callback]
-  (go (let [{:keys [status body] :as result} (<! (http/post "endpoint" {:edn-params query}))]
+  (go (let [{:keys [status body] :as result} (<! (post "endpoint" {:edn-params query}))]
         (if (not= status 200)
           (print "server error: " body)
-          (callback (reader/read-string body))))))
+          (callback (read-string body))))))
 
 (ql/mount {:component      TodoList
-           :dom-element    (gdom/getElement "app")
+           :dom-element    (getElement "app")
            :state          app-state
            :remote-handler remote-handler
-           :parsers        {:read   pa/read
-                            :mutate pa/mutate
-                            :remote pa/remote
-                            :sync   pa/sync}})
+           :parsers        {:read   read
+                            :mutate mutate
+                            :remote remote
+                            :sync   sync}})
