@@ -1,14 +1,8 @@
-# qlkit-todo
+# qlkit-todo-demo
 
-FIXME: Write a one-line description of your library/project.
+This is a "batteries included" demo of qlkit- [Try a live version here](http://forwardblockchain.com/qlkit-todomvc/)
 
-## Overview
-
-FIXME: Write a paragraph about the library/project and highlight its goals.
-
-## Install
-
-This project also requires the `qlkit` and `qlkit-material-ui` packages. Please `lein install` those first.
+Please read the [recommended qlkit introductory article](https://medium.com/p/79b7b118ddac) for a walkthrough of this application.
 
 ## Setup
 
@@ -36,8 +30,7 @@ To create a production build run:
 And open your browser in `resources/public/index.html`. You will not
 get live reloading, nor a REPL. 
 
-## License
 
-Copyright © 2014 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+---
+_Copyright (c) Conrad Barski. All rights reserved._
+_The use and distribution terms for this software are covered by the Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php), the same license used by Clojure._
