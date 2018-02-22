@@ -9,9 +9,9 @@
   :dependencies [[org.clojure/clojure "1.9.0-beta4"]
                  [org.clojure/clojurescript "1.9.946"]
                  [org.clojure/core.async  "0.3.443"]
-                 [qlkit "0.2.0-SNAPSHOT"]
-                 [qlkit-renderer "0.2.0-SNAPSHOT"]
-                 [qlkit-material-ui "0.2.0-SNAPSHOT"]
+                 [qlkit "0.3.0-SNAPSHOT"]
+                 [qlkit-renderer "0.3.0-SNAPSHOT"]
+                 [qlkit-material-ui "0.3.0-SNAPSHOT"]
                  [com.cognitect/transit-cljs "0.8.243"]
                  [cljs-http/cljs-http "0.1.44"]]
 
@@ -22,7 +22,13 @@
 
   :cljsbuild {:builds
               [{:id "dev"
-                :source-paths ["src"]
+                :source-paths ["src"
+                               "checkouts/cljs-ethereum"
+                               "checkouts/qlkit-async"
+                               "checkouts/qlkit-renderer"
+                               "checkouts/qlkit"
+                               "checkouts/qlkit-material-ui"
+                               ]
 
                 ;; The presence of a :figwheel configuration here
                 ;; will cause figwheel to inject the figwheel client
@@ -52,7 +58,7 @@
                            :optimizations :advanced
                            :pretty-print false}}]}
 
-  :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
+  :figwheel { ;; :http-server-root "public" ;; default and assumes "resources"
              ;; :server-port 3449 ;; default
              ;; :server-ip "127.0.0.1"
 
