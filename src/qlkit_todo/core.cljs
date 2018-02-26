@@ -39,7 +39,7 @@
                     :on-change   (fn [e]
                                    (update-state! assoc :new-todo (.-value (.-target e))))}]
            (when (seq todos)
-             [:card [:list (for [todo (sort-by :todo/text todos)]
+             [:card [:list (for [todo todos]
                              [TodoItem todo])]])]))
 
 (defn remote-handler [query callback]
