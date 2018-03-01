@@ -17,10 +17,10 @@
   (query [[:todo/text] [:db/id]])
   (render [{:keys [:todo/text] :as atts} state]
           [:list-item
-           [:list-item-avatar [:avatar [:icon.check {:color "green"}]]]
+           [:list-item-avatar [:avatar [:icon/check {:color "green"}]]]
            [:list-item-text {:primary text}]
            [:list-item-secondary-action {:on-click #(transact! [:todo/delete!])}
-            [:icon-button [:icon.cancel {:color "black"}]]]]))
+            [:icon-button [:icon/cancel {:color "black"}]]]]))
 
 (defcomponent TodoList
   (query [[:qlkit-todo/todos (ql/get-query TodoItem)]])
