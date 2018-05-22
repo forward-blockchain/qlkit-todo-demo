@@ -36,12 +36,11 @@ To run figwheel:
 
     clojure -R:repl build.clj figwheel 3450
     
-You can then connect cider via `cider-connect` `localhost` `3450`. Once you get to the clojure prompt from emace, type `(cljs-repl)` for the clojurescript repl.
+You can then connect cider via `cider-connect` `localhost` `3450`. Once you get to the clojure prompt from emacs, type `(cljs-repl)` for the clojurescript repl.
 
 To compile the clojurescript code:
 
     clojure -R:repl build.clj compile
-    
 
 
 ---
