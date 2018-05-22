@@ -22,11 +22,6 @@
   :cljsbuild {:builds
               [{:id "dev"
                 :source-paths ["src"
-                               "checkouts/cljs-ethereum"
-                               "checkouts/qlkit-async"
-                               "checkouts/qlkit-renderer"
-                               "checkouts/qlkit"
-                               "checkouts/qlkit-material-ui"
                                ]
 
                 ;; The presence of a :figwheel configuration here
