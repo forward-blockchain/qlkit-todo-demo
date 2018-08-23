@@ -16,16 +16,19 @@
 (defcomponent TodoItem
   (query [[:todo/text] [:db/id]])
   (render [{:keys [:todo/text] :as atts} state]
-          [:li {:primary-text text
-                :right-icon [:span {:on-click (fn []
-                                                (transact! [:todo/delete!]))}
-                             [:navigation-cancel]]}]))
+          [:list-item
+           [:list-item-avatar [:avatar [:icon/check {:color "green"}]]]
+           [:list-item-text {:primary text}]
+           [:list-item-secondary-action {:on-click #(transact! [:todo/delete!])}
+            [:icon-button [:icon/cancel {:color "black"}]]]]))
 
 (defcomponent TodoList
   (query [[:qlkit-todo/todos (ql/get-query TodoItem)]])
   (render [{:keys [:qlkit-todo/todos] :as atts} {:keys [new-todo] :as state}]
           [:div {:max-width 300}
            [:input {:id          :new-todo
+                    :auto-focus  true
+                    :full-width  true
                     :value       (or new-todo "")
                     :placeholder "What needs to be done?"
                     :on-key-down (fn [e]
@@ -36,8 +39,8 @@
                     :on-change   (fn [e]
                                    (update-state! assoc :new-todo (.-value (.-target e))))}]
            (when (seq todos)
-             [:card [:ol (for [todo todos]
-                           [TodoItem todo])]])]))
+             [:card [:list (for [todo todos]
+                             [TodoItem todo])]])]))
 
 (defn remote-handler [query callback]
   (go (let [{:keys [status body] :as result} (<! (post "endpoint" {:edn-params query}))]

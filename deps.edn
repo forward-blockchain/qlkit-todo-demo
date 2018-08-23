@@ -1,0 +1,14 @@
+{:paths ["src" "dev" "resources"]
+ :deps    {org.clojure/clojurescript  {:mvn/version "1.9.946"}
+           org.clojure/core.async     {:mvn/version "0.3.443"}
+           qlkit                      {:mvn/version "0.3.0-SNAPSHOT"}
+           qlkit-material-ui          {:mvn/version "0.3.0-SNAPSHOT"}
+           com.cognitect/transit-cljs {:mvn/version "0.8.243"}
+           cljs-http/cljs-http        {:mvn/version "0.1.44"}}
+ :aliases {:repl {:extra-deps {com.cemerick/piggieback {:mvn/version "0.2.2"
+                                                        :exclusions  [com.google.javascript/closure-compiler]}
+                               figwheel-sidecar        {:mvn/version "0.5.14"
+                                                        :exclusions  [com.google.javascript/closure-compiler]}
+                               cider/cider-nrepl       {:mvn/version "0.15.1"}
+                               org.clojure/tools.nrepl {:mvn/version "0.2.12"}
+                               refactor-nrepl          {:mvn/version "2.3.1"}}}}}

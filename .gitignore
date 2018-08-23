@@ -11,4 +11,5 @@ pom.xml
 .lein-plugins/
 .repl
 .nrepl-port
+.cpcache
 checkouts

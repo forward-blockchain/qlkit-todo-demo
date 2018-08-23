@@ -8,8 +8,8 @@
   (let [{:keys [todo-id]} params]
     (if todo-id
       [(parse-children query-term (assoc env :todo-id todo-id))]
-      (for [id (keys by-id)]
-        (parse-children query-term (assoc env :todo-id id))))))
+      (sort-by :todo/text (for [id (keys by-id)]
+                            (parse-children query-term (assoc env :todo-id id)))))))
 
 (defmethod read :db/id
   [query-term {:keys [todo-id] :as env} state]
