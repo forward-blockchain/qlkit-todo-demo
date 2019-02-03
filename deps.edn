@@ -1,7 +1,7 @@
 {:deps {com.bhauman/figwheel-main       {:mvn/version "0.2.0"}
         com.bhauman/rebel-readline-cljs {:mvn/version "0.1.4"}
-        org.clojure/clojurescript       {:mvn/version "1.10.339"},
-        org.clojure/core.async          {:mvn/version "0.4.474"}
+        org.clojure/clojurescript       {:mvn/version "1.10.516"},
+        org.clojure/core.async          {:mvn/version "0.4.490"}
         qlkit-material-ui                {:mvn/version "0.4.0-SNAPSHOT"}
         cljs-http/cljs-http             {:mvn/version "0.1.45"}}
  :paths ["src" "target" "resources"]}
