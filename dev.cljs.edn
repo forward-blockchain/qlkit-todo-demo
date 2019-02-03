@@ -1,0 +1,3 @@
+{:main       qlkit-todo.core
+ :output-to  "resources/public/js/compiled/qlkit_todo.js"
+ :output-dir "resources/public/js/compiled/out"}

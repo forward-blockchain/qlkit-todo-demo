@@ -16,10 +16,12 @@
 (defcomponent TodoItem
   (query [[:todo/text] [:db/id]])
   (render [{:keys [:todo/text] :as atts} state]
-          [:li {:primary-text text
-                :right-icon [:span {:on-click (fn []
-                                                (transact! [:todo/delete!]))}
-                             [:navigation-cancel]]}]))
+          [:list-item {:button true}
+           [:list-item-text {:primary text}]
+           [:list-item-secondary-action {}
+            [:icon-button {}
+             [:icon/cancel {:on-click (fn []
+                                        (transact! [:todo/delete!]))}]]]]))
 
 (defcomponent TodoList
   (query [[:qlkit-todo/todos (ql/get-query TodoItem)]])
@@ -36,8 +38,8 @@
                     :on-change   (fn [e]
                                    (update-state! assoc :new-todo (.-value (.-target e))))}]
            (when (seq todos)
-             [:card [:ol (for [todo todos]
-                           [TodoItem todo])]])]))
+             [:card [:list (for [todo todos]
+                        [TodoItem todo])]])]))
 
 (defn remote-handler [query callback]
   (go (let [{:keys [status body] :as result} (<! (post "endpoint" {:edn-params query}))]
